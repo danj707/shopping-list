@@ -1,8 +1,3 @@
-* {
-    box-sizing: border-box;
-    border: 1px solid red;
-}
-
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -46,4 +41,13 @@ button:hover {
 
 .shopping-item__checked {
     text-decoration: line-through;
+}
+
+.error {
+    background-color: red;
+}
+
+.beermug {
+    height: 50px;
+    vertical-align: middle;
 }

@@ -1,24 +1,34 @@
-//add button clicker
-$("#js-shopping-list-form").submit(function (event) {
-    var shoppingInput = $("input#shopping-list-entry").val();
-    alert('Handler for .submit() add item called: ' + shoppingInput);
-    $('.shopping-list').append('<li><span class="shopping-item">' +
-        shoppingInput + '</span><div class="shopping-item-controls">' + '<button class="shopping-item-toggle">' + '<span class="button-label">check</span></button><button class="shopping-item-delete">' + '<span class="button-label">delete</span></button></div></li>');
-    //event.preventDefault();
-});
+$(document).ready(function () {
 
-//check button clicker
-$('.shopping-item-toggle').click(function (event) {
-    alert("handler for .click() toggle called.");
-    var content = $("span.shopping-item__checked").html();
-    //console.log(content);
-    $('.shopping-item-toggle').css('<span class="shopping-item shopping-item__checked">' + content + '</span');
-    event.preventDefault();
-});
+    //add button clicker
+    $("#js-shopping-list-form").submit(function (event) {
+        event.preventDefault(); // dont submit to server
+        var shoppingInput = $("input#shopping-list-entry").val();
 
-//delete button clicker
-$('.shopping-item-delete').click(function (event) {
-    alert("handler for .click() delete called.");
-    $('.shopping-item-delete').parent().parent('li').hide();
-    event.preventDefault();
+        //trim whitespace
+        $.trim(shoppingInput);
+
+        //check for undefined and alert, color input field
+        if (!shoppingInput) {
+            alert("Sorry, you must choose beer!");
+            $(this).toggleClass("error", 1);
+        } else {
+            //otherwise, add the <li>
+            $('.shopping-list').append('<li><span class="shopping-item">' +
+                shoppingInput + '</span><div class="shopping-item-controls">' + '<button class="shopping-item-toggle">' + '<span class="button-label">check</span></button><button class="shopping-item-delete">' + '<span class="button-label">delete</span></button></div></li>');
+        }
+    });
+
+    //check cross off button clicker thingie
+    $(".shopping-list").on("click", ".shopping-item-toggle", function (event) {
+        event.preventDefault();
+        $(this).closest('li').find(".shopping-item").toggleClass("shopping-item__checked");
+    });
+
+    //delete button clicker
+    $(".shopping-list").on("click", ".shopping-item-delete", function (event) {
+        event.preventDefault();
+        $(this).closest('li').remove();
+    });
+
 });

@@ -11,11 +11,12 @@ $(document).ready(function () {
         //check for undefined and alert, color input field
         if (!shoppingInput) {
             alert("Sorry, you must choose beer!");
-            $(this).toggleClass("error", 1);
+            $('#js-shopping-list-form').addClass("error");
         } else {
             //otherwise, add the <li>
             $('.shopping-list').append('<li><span class="shopping-item">' +
                 shoppingInput + '</span><div class="shopping-item-controls">' + '<button class="shopping-item-toggle">' + '<span class="button-label">check</span></button><button class="shopping-item-delete">' + '<span class="button-label">delete</span></button></div></li>');
+            $('#js-shopping-list-form').removeClass("error");
         }
     });
 
